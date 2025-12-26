@@ -42,7 +42,7 @@ export default function HeaderBanner({ user }) {
         
         {/* AVATAR */}
         <Avatar 
-          src={user.profilePicture ? `http://localhost:5001/${user.profilePicture}` : null} 
+          src={user.profilePicture ? `https://hrms-backend-8254.onrender.com/${user.profilePicture}` : null} 
           sx={{ 
             width: 120, 
             height: 120, 

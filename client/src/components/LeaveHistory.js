@@ -43,7 +43,7 @@ export default function LeaveHistory() {
       // 1. Get My ID to filter
       const myId = JSON.parse(atob(token.split('.')[1])).user.id;
 
-      const res = await axios.get('http://localhost:5001/api/leaves', { 
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/leaves', { 
         headers: { Authorization: token } 
       });
       
@@ -77,7 +77,7 @@ export default function LeaveHistory() {
       if (!path) return;
       // Convert "uploads\file.jpg" (Windows) to "uploads/file.jpg" (Web)
       const cleanPath = path.replace(/\\/g, "/"); 
-      window.open(`http://localhost:5001/${cleanPath}`, '_blank');
+      window.open(`https://hrms-backend-8254.onrender.com/${cleanPath}`, '_blank');
   };
 
   const getStatusChip = (status) => {

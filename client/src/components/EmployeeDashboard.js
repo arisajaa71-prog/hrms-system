@@ -51,8 +51,8 @@ const EmployeeDashboard = ({ user, onNavigate, children }) => {
       const token = localStorage.getItem('token');
       // Fix: Fetch from the correct endpoints
       const [empRes, leaveRes] = await Promise.all([
-        axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } }),
-        axios.get('http://localhost:5001/api/leaves', { headers: { Authorization: token } })
+        axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } }),
+        axios.get('https://hrms-backend-8254.onrender.com/api/leaves', { headers: { Authorization: token } })
       ]);
       
       const pendingCount = leaveRes.data.filter(l => l.status === 'Pending').length;

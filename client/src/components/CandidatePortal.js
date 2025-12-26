@@ -29,7 +29,7 @@ export default function CandidatePortal({ onBack }) {
     const handleVerify = async () => {
         try {
             setError('');
-            const res = await axios.post('http://localhost:5001/api/onboarding/verify', { accessCode });
+            const res = await axios.post('https://hrms-backend-8254.onrender.com/api/onboarding/verify', { accessCode });
             setCandidateData(res.data);
             setStage(2);
         } catch (err) {
@@ -51,7 +51,7 @@ export default function CandidatePortal({ onBack }) {
             if (files.resume) data.append('resume', files.resume);
             if (files.contract) data.append('contract', files.contract);
 
-            await axios.put(`http://localhost:5001/api/onboarding/candidate-submit/${candidateData._id}`, data, {
+            await axios.put(`https://hrms-backend-8254.onrender.com/api/onboarding/candidate-submit/${candidateData._id}`, data, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 

@@ -33,7 +33,7 @@ export default function AttendanceWidget() {
   const fetchStatus = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5001/api/attendance/status', {
+      const res = await fetch('https://hrms-backend-8254.onrender.com/api/attendance/status', {
         headers: { Authorization: token } 
       });
       const data = await res.json();
@@ -68,7 +68,7 @@ export default function AttendanceWidget() {
         
         try {
           const token = localStorage.getItem('token');
-          const res = await fetch('http://localhost:5001/api/attendance/clock-in', {
+          const res = await fetch('https://hrms-backend-8254.onrender.com/api/attendance/clock-in', {
             method: 'POST',
             headers: { 
               'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export default function AttendanceWidget() {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5001/api/attendance/clock-out', {
+      const res = await fetch('https://hrms-backend-8254.onrender.com/api/attendance/clock-out', {
         method: 'PUT',
         headers: { Authorization: token }
       });

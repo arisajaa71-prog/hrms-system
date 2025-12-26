@@ -35,7 +35,7 @@ export default function Performance({ role }) {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5001/api/employees', { 
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', { 
         headers: { Authorization: token } 
       });
       setEmployees(res.data);
@@ -45,7 +45,7 @@ export default function Performance({ role }) {
   const fetchMyReviews = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5001/api/performance/my-reviews', { 
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/performance/my-reviews', { 
         headers: { Authorization: token } 
       });
       setMyReviews(res.data);
@@ -65,7 +65,7 @@ export default function Performance({ role }) {
 
     try {
       // 2. SEND REQUEST WITH TOKEN
-      await axios.post('http://localhost:5001/api/performance', formData, {
+      await axios.post('https://hrms-backend-8254.onrender.com/api/performance', formData, {
         headers: { Authorization: token } // <--- CRITICAL FIX
       });
 

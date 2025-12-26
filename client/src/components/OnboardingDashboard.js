@@ -50,7 +50,7 @@ export default function OnboardingDashboard({ role, isHR }) {
     const fetchCandidates = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5001/api/onboarding', {
+            const res = await axios.get('https://hrms-backend-8254.onrender.com/api/onboarding', {
                 headers: { Authorization: token }
             });
             setCandidates(res.data);
@@ -60,7 +60,7 @@ export default function OnboardingDashboard({ role, isHR }) {
     const fetchManagers = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5001/api/employees', {
+            const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', {
                 headers: { Authorization: token }
             });
             setEmployees(res.data);
@@ -84,7 +84,7 @@ export default function OnboardingDashboard({ role, isHR }) {
     const handleInitiate = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5001/api/onboarding/initiate', formData, {
+            const res = await axios.post('https://hrms-backend-8254.onrender.com/api/onboarding/initiate', formData, {
                 headers: { Authorization: token }
             });
             setNewAccessCode(res.data.accessCode);
@@ -100,7 +100,7 @@ export default function OnboardingDashboard({ role, isHR }) {
         
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:5001/api/onboarding/${id}`, {
+            await axios.delete(`https://hrms-backend-8254.onrender.com/api/onboarding/${id}`, {
                 headers: { Authorization: token }
             });
             setCandidates(candidates.filter(c => c._id !== id));
@@ -115,7 +115,7 @@ export default function OnboardingDashboard({ role, isHR }) {
         
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5001/api/onboarding/request-changes/${selectedCandidate._id}`, {}, {
+            await axios.put(`https://hrms-backend-8254.onrender.com/api/onboarding/request-changes/${selectedCandidate._id}`, {}, {
                 headers: { Authorization: token }
             });
             alert("Status updated! The candidate can now re-submit their information.");
@@ -136,7 +136,7 @@ export default function OnboardingDashboard({ role, isHR }) {
     const handleChecklistToggle = async (taskName, currentStatus) => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.put(`http://localhost:5001/api/onboarding/update-checklist/${selectedCandidate._id}`, 
+            const res = await axios.put(`https://hrms-backend-8254.onrender.com/api/onboarding/update-checklist/${selectedCandidate._id}`, 
                 { task: taskName, status: !currentStatus },
                 { headers: { Authorization: token } }
             );
@@ -152,7 +152,7 @@ export default function OnboardingDashboard({ role, isHR }) {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`http://localhost:5001/api/onboarding/approve/${selectedCandidate._id}`, 
+            await axios.post(`https://hrms-backend-8254.onrender.com/api/onboarding/approve/${selectedCandidate._id}`, 
                 { workEmail }, 
                 { headers: { Authorization: token } }
             );
@@ -172,7 +172,7 @@ export default function OnboardingDashboard({ role, isHR }) {
 
     const renderDocLink = (path, label) => {
         if (!path) return <Typography variant="caption" color="textSecondary">Not Uploaded</Typography>;
-        const url = `http://localhost:5001/${path.replace(/\\/g, "/")}`;
+        const url = `https://hrms-backend-8254.onrender.com/${path.replace(/\\/g, "/")}`;
         return (
             <Button variant="outlined" size="small" startIcon={<DescriptionIcon />} href={url} target="_blank" rel="noopener noreferrer" sx={{ textTransform: 'none' }}>
                 View {label}

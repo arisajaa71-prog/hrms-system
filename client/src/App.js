@@ -68,7 +68,7 @@ function App() {
   // --- 1. FETCH CURRENT USER ---
   const fetchCurrentUser = async () => {
       try {
-          const res = await axios.get('http://localhost:5001/api/auth', { 
+          const res = await axios.get('https://hrms-backend-8254.onrender.com/api/auth', { 
               headers: { Authorization: localStorage.getItem('token') } 
           });
           setCurrentUserData(res.data);
@@ -89,7 +89,7 @@ function App() {
 
   const handleResetSubmit = async () => {
     try {
-        await axios.put(`http://localhost:5001/api/auth/reset-password/${resetToken}`, { password: newPassword });
+        await axios.put(`https://hrms-backend-8254.onrender.com/api/auth/reset-password/${resetToken}`, { password: newPassword });
         alert("Password Reset Successfully! Please Login.");
         window.location.href = '/'; 
     } catch (err) { 

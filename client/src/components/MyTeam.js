@@ -34,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function getAvatarProps(emp) {
     if (emp && emp.profilePicture) {
-        return { src: `http://localhost:5001/${emp.profilePicture}`, alt: emp.firstName };
+        return { src: `https://hrms-backend-8254.onrender.com/${emp.profilePicture}`, alt: emp.firstName };
     }
     const name = emp ? `${emp.firstName} ${emp.lastName}` : "User";
     let hash = 0;
@@ -57,7 +57,7 @@ export default function MyTeam() {
       const token = localStorage.getItem('token');
       // --- THE FIX IS HERE ---
       // Changed from '/my-team' to '/team' to match the backend route exactly
-      const res = await axios.get('http://localhost:5001/api/employees/team', {
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees/team', {
         headers: { Authorization: token }
       });
       setTeam(res.data);

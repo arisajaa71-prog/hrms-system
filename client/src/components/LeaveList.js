@@ -63,8 +63,8 @@ export default function LeaveList() {
     try {
         const token = localStorage.getItem('token');
         const [leavesRes, empsRes] = await Promise.all([
-            axios.get('http://localhost:5001/api/leaves', { headers: { Authorization: token } }),
-            axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } })
+            axios.get('https://hrms-backend-8254.onrender.com/api/leaves', { headers: { Authorization: token } }),
+            axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } })
         ]);
         setLeaves(leavesRes.data);
         setEmployees(empsRes.data);
@@ -75,7 +75,7 @@ export default function LeaveList() {
   const updateStatus = async (id, status) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5001/api/leaves/${id}`, { status }, { headers: { Authorization: token } });
+      await axios.put(`https://hrms-backend-8254.onrender.com/api/leaves/${id}`, { status }, { headers: { Authorization: token } });
       fetchData(); 
     } catch (err) { alert("Error updating status"); }
   };
@@ -86,7 +86,7 @@ export default function LeaveList() {
       
       try {
           const token = localStorage.getItem('token');
-          await axios.put(`http://localhost:5001/api/leaves/${id}/cancel`, {}, { headers: { Authorization: token } });
+          await axios.put(`https://hrms-backend-8254.onrender.com/api/leaves/${id}/cancel`, {}, { headers: { Authorization: token } });
           fetchData(); // Refresh to see the new status
       } catch (err) { alert("Error cancelling leave"); }
   };
@@ -94,13 +94,13 @@ export default function LeaveList() {
   const handleViewDoc = (path) => {
       if (!path) return;
       const cleanPath = path.replace(/\\/g, "/"); 
-      window.open(`http://localhost:5001/${cleanPath}`, '_blank');
+      window.open(`https://hrms-backend-8254.onrender.com/${cleanPath}`, '_blank');
   };
 
   const handleAddCredit = async () => {
     try {
         const token = localStorage.getItem('token');
-        await axios.put('http://localhost:5001/api/leaves/adjust-balance', creditData, { headers: { Authorization: token } });
+        await axios.put('https://hrms-backend-8254.onrender.com/api/leaves/adjust-balance', creditData, { headers: { Authorization: token } });
         alert("Balance Updated"); setOpenCredit(false); fetchData();
     } catch (err) { alert("Error adding credit"); }
   };
@@ -108,7 +108,7 @@ export default function LeaveList() {
   const handleBlockDates = async () => {
     try {
         const token = localStorage.getItem('token');
-        await axios.post('http://localhost:5001/api/leaves/block-dates', blockData, { headers: { Authorization: token } });
+        await axios.post('https://hrms-backend-8254.onrender.com/api/leaves/block-dates', blockData, { headers: { Authorization: token } });
         alert("Dates Blocked"); setOpenBlock(false);
     } catch (err) { alert("Error blocking dates"); }
   };
@@ -176,7 +176,7 @@ export default function LeaveList() {
                     <StyledTableRow key={leave._id}>
                       <StyledTableCell component="th" scope="row" sx={{ fontWeight: 'bold', color: '#1565c0' }}>
                         <Box sx={{display:'flex', gap:1, alignItems:'center'}}>
-                            <Avatar src={leave.employee?.profilePicture ? `http://localhost:5001/${leave.employee.profilePicture}` : null} sx={{ width: 30, height: 30 }}/>
+                            <Avatar src={leave.employee?.profilePicture ? `https://hrms-backend-8254.onrender.com/${leave.employee.profilePicture}` : null} sx={{ width: 30, height: 30 }}/>
                             {leave.employee ? `${leave.employee.firstName} ${leave.employee.lastName}` : 'Unknown'}
                         </Box>
                       </StyledTableCell>
@@ -248,7 +248,7 @@ export default function LeaveList() {
                         <Accordion key={emp._id} sx={{ mb: 1, border: '1px solid #e0e0e0', boxShadow: 'none' }}>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', gap: 2 }}>
-                                    <Avatar src={emp.profilePicture ? `http://localhost:5001/${emp.profilePicture}` : null} />
+                                    <Avatar src={emp.profilePicture ? `https://hrms-backend-8254.onrender.com/${emp.profilePicture}` : null} />
                                     <Box sx={{ flexGrow: 1 }}>
                                         <Typography fontWeight="bold">{emp.firstName} {emp.lastName}</Typography>
                                         <Typography variant="caption" color="textSecondary">{emp.department}</Typography>
@@ -320,7 +320,7 @@ export default function LeaveList() {
                {getUpcomingLeaves().map(leave => (
                    <Paper key={leave._id} elevation={2} sx={{ p: 2, mb: 2, borderLeft: '5px solid #1976d2', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                           <Avatar src={leave.employee?.profilePicture ? `http://localhost:5001/${leave.employee.profilePicture}` : null} />
+                           <Avatar src={leave.employee?.profilePicture ? `https://hrms-backend-8254.onrender.com/${leave.employee.profilePicture}` : null} />
                            <Box><Typography variant="subtitle1" fontWeight="bold">{leave.employee?.firstName} {leave.employee?.lastName}</Typography><Typography variant="body2" color="textSecondary">{leave.leaveType}</Typography></Box>
                        </Box>
                        <Box sx={{ textAlign: 'right' }}><Typography variant="h6" color="primary" fontWeight="bold">{new Date(leave.startDate).toLocaleDateString()}</Typography><Chip label="Approved" size="small" color="success" /></Box>

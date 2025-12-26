@@ -64,7 +64,7 @@ const wideMenuProps = { PaperProps: { style: { width: 'auto', minWidth: 300 } } 
 // --- HELPERS ---
 function getAvatarProps(emp) {
     if (emp && emp.profilePicture) {
-        return { src: `http://localhost:5001/${emp.profilePicture}`, alt: emp.firstName };
+        return { src: `https://hrms-backend-8254.onrender.com/${emp.profilePicture}`, alt: emp.firstName };
     }
     const name = emp ? `${emp.firstName} ${emp.lastName}` : "User";
     let hash = 0;
@@ -186,7 +186,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
   const fetchEmployees = async () => {
     try { 
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } }); 
+        const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } }); 
         setEmployees(res.data); 
     } catch(err) { console.error(err); }
   };
@@ -246,7 +246,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
         if (selectedFile) data.append('image', selectedFile);
         data.append('salary', 0); 
         
-        const res = await axios.post('http://localhost:5001/api/employees/add', data, { 
+        const res = await axios.post('https://hrms-backend-8254.onrender.com/api/employees/add', data, { 
             headers: { Authorization: token, 'Content-Type': 'multipart/form-data' } 
         });
         
@@ -284,7 +284,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
             if (editData.reportsTo) data.append('reportsTo', editData.reportsTo);
             data.append('image', selectedFile);
 
-            const res = await axios.put(`http://localhost:5001/api/employees/${selectedEmp._id}`, data, {
+            const res = await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${selectedEmp._id}`, data, {
                 headers: { Authorization: token, 'Content-Type': 'multipart/form-data' }
             });
             alert("Profile & Photo Updated!");
@@ -304,7 +304,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
                 reportsTo: editData.reportsTo,
                 workLocation: editData.workLocation
             };
-            const res = await axios.put(`http://localhost:5001/api/employees/${selectedEmp._id}`, payload, {
+            const res = await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${selectedEmp._id}`, payload, {
                 headers: { Authorization: token, 'Content-Type': 'application/json' }
             });
             alert("Profile Updated Successfully!");
@@ -319,7 +319,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
       if (!window.confirm(`Are you sure you want to delete ${selectedEmp.firstName}?`)) return;
       try {
           const token = localStorage.getItem('token');
-          await axios.delete(`http://localhost:5001/api/employees/${selectedEmp._id}`, { headers: { Authorization: token } });
+          await axios.delete(`https://hrms-backend-8254.onrender.com/api/employees/${selectedEmp._id}`, { headers: { Authorization: token } });
           alert("Deleted"); setOpenView(false); fetchEmployees();
       } catch (err) { alert("Error deleting"); }
   };
@@ -327,7 +327,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
   const handleChangePassword = async () => { 
       try {
           const token = localStorage.getItem('token');
-          await axios.put('http://localhost:5001/api/auth/change-password', passData, { headers: { Authorization: token } });
+          await axios.put('https://hrms-backend-8254.onrender.com/api/auth/change-password', passData, { headers: { Authorization: token } });
           alert("Password Changed Successfully!");
           setPassData({ currentPassword: '', newPassword: '' });
       } catch (err) { alert(err.response?.data?.msg || "Error changing password"); }
@@ -336,7 +336,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
   const handleAdminReset = async () => { 
       try {
           const token = localStorage.getItem('token');
-          await axios.put(`http://localhost:5001/api/employees/${selectedEmp._id}/force-reset`, 
+          await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${selectedEmp._id}/force-reset`, 
             { newPassword: adminResetPass }, { headers: { Authorization: token } }
           );
           alert(`Password reset to: ${adminResetPass}`);
@@ -360,7 +360,7 @@ export default function Directory({ role, isHR, actionTarget, setActionTarget })
   const handleSubmitPromotion = async () => { 
     try {
         const token = localStorage.getItem('token');
-        await axios.put(`http://localhost:5001/api/employees/${selectedEmp._id}/promote`, promoteData, { headers: { Authorization: token } });
+        await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${selectedEmp._id}/promote`, promoteData, { headers: { Authorization: token } });
         alert("Employee Promoted Successfully!"); setOpenPromote(false); fetchEmployees(); 
     } catch (err) { alert(err.response?.data?.msg || "Error promoting employee"); }
   };

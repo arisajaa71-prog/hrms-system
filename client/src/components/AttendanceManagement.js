@@ -30,7 +30,7 @@ const ShiftManager = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5001/api/employees', {
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', {
         headers: { Authorization: token }
       });
       // Exclude Owner from Shift Manager
@@ -44,7 +44,7 @@ const ShiftManager = () => {
   const handleShiftChange = async (id, newShift) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5001/api/employees/${id}`, 
+      await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${id}`, 
         { workShift: newShift }, 
         { headers: { Authorization: token } }
       );
@@ -88,7 +88,7 @@ const ShiftManager = () => {
                <TableRow key={emp._id}>
                  <TableCell>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                       <Avatar src={emp.profilePicture ? `http://localhost:5001/${emp.profilePicture}` : null} />
+                       <Avatar src={emp.profilePicture ? `https://hrms-backend-8254.onrender.com/${emp.profilePicture}` : null} />
                        <Typography variant="subtitle2" fontWeight="bold">{emp.firstName} {emp.lastName}</Typography>
                     </Box>
                  </TableCell>
@@ -158,7 +158,7 @@ export default function AttendanceManagement({ role, isHR }) { // Added isHR pro
     try {
       const token = localStorage.getItem('token');
       
-      let url = 'http://localhost:5001/api/attendance/history';
+      let url = 'https://hrms-backend-8254.onrender.com/api/attendance/history';
       if (viewMode === 'day') {
           url += `?date=${dateVal}`;
       } else {
@@ -406,7 +406,7 @@ export default function AttendanceManagement({ role, isHR }) { // Added isHR pro
                     {missing.map(emp => (
                         <Grid item xs={12} md={4} key={emp._id}>
                             <Paper sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 2, borderLeft: '4px solid #d32f2f' }}>
-                                <Avatar src={`http://localhost:5001/${emp.profilePicture}`} sx={{ width: 50, height: 50 }} />
+                                <Avatar src={`https://hrms-backend-8254.onrender.com/${emp.profilePicture}`} sx={{ width: 50, height: 50 }} />
                                 <Box>
                                     <Typography variant="subtitle2" fontWeight="bold">{emp.firstName} {emp.lastName}</Typography>
                                     <Typography variant="caption" color="textSecondary">{emp.department}</Typography>
@@ -460,7 +460,7 @@ export default function AttendanceManagement({ role, isHR }) { // Added isHR pro
                           
                           <TableCell>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                              <Avatar src={emp.profilePicture ? `http://localhost:5001/${emp.profilePicture}` : null} />
+                              <Avatar src={emp.profilePicture ? `https://hrms-backend-8254.onrender.com/${emp.profilePicture}` : null} />
                               <Box>
                                   <Typography variant="subtitle2" fontWeight="bold">
                                       {emp.firstName} {emp.lastName}

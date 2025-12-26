@@ -36,7 +36,7 @@ export default function Login({ setToken, setRole, onOnboardClick }) {
     const cleanPassword = formData.password; 
 
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/login', { 
+      const res = await axios.post('https://hrms-backend-8254.onrender.com/api/auth/login', { 
         email: cleanEmail, 
         password: cleanPassword 
       });
@@ -62,7 +62,7 @@ export default function Login({ setToken, setRole, onOnboardClick }) {
 
   const handleForgotSubmit = async () => {
       try {
-          const res = await axios.post('http://localhost:5001/api/requests/create', { email: forgotEmail });
+          const res = await axios.post('https://hrms-backend-8254.onrender.com/api/requests/create', { email: forgotEmail });
           setForgotMsg(res.data.msg); 
           setIsSuccess(true);
       } catch (err) {

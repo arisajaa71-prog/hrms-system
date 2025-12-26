@@ -30,13 +30,13 @@ export default function DashboardWidgets({ onNavigate }) {
       const isAdmin = role === 'Owner' || role === 'Admin' || role === 'Senior Admin';
 
       const promises = [
-        axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } }),
-        axios.get('http://localhost:5001/api/leaves', { headers: { Authorization: token } })
+        axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } }),
+        axios.get('https://hrms-backend-8254.onrender.com/api/leaves', { headers: { Authorization: token } })
       ];
 
       if(isAdmin) {
-          promises.push(axios.get('http://localhost:5001/api/requests/pending', { headers: { Authorization: token } }));
-          promises.push(axios.get('http://localhost:5001/api/requests/history', { headers: { Authorization: token } }));
+          promises.push(axios.get('https://hrms-backend-8254.onrender.com/api/requests/pending', { headers: { Authorization: token } }));
+          promises.push(axios.get('https://hrms-backend-8254.onrender.com/api/requests/history', { headers: { Authorization: token } }));
       }
 
       const results = await Promise.all(promises);
@@ -114,7 +114,7 @@ export default function DashboardWidgets({ onNavigate }) {
       e.stopPropagation();
       try {
           const token = localStorage.getItem('token');
-          await axios.put(`http://localhost:5001/api/requests/${id}/resolve`, {}, { headers: { Authorization: token } });
+          await axios.put(`https://hrms-backend-8254.onrender.com/api/requests/${id}/resolve`, {}, { headers: { Authorization: token } });
           fetchData(); 
       } catch (err) { alert("Error resolving request"); }
   };
@@ -128,7 +128,7 @@ export default function DashboardWidgets({ onNavigate }) {
       }
   };
 
-  const getAvatarSrc = (path) => path ? `http://localhost:5001/${path}` : null;
+  const getAvatarSrc = (path) => path ? `https://hrms-backend-8254.onrender.com/${path}` : null;
   
   // --- FIX 2: Add 'Owner' to Render Logic ---
   const isAdmin = role === 'Owner' || role === 'Admin' || role === 'Senior Admin';

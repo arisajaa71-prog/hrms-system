@@ -21,7 +21,7 @@ export default function NewsWidget() {
   const fetchNews = async () => {
     try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5001/api/announcements', { headers: { Authorization: token } });
+        const res = await axios.get('https://hrms-backend-8254.onrender.com/api/announcements', { headers: { Authorization: token } });
         setNews(res.data);
     } catch (err) { console.error(err); }
   };
@@ -29,7 +29,7 @@ export default function NewsWidget() {
   const handlePost = async () => {
       try {
           const token = localStorage.getItem('token');
-          await axios.post('http://localhost:5001/api/announcements', newPost, { headers: { Authorization: token } });
+          await axios.post('https://hrms-backend-8254.onrender.com/api/announcements', newPost, { headers: { Authorization: token } });
           setNewPost({ title: '', content: '' });
           setShowForm(false);
           fetchNews();
@@ -40,7 +40,7 @@ export default function NewsWidget() {
       if(!window.confirm("Delete this announcement?")) return;
       try {
           const token = localStorage.getItem('token');
-          await axios.delete(`http://localhost:5001/api/announcements/${id}`, { headers: { Authorization: token } });
+          await axios.delete(`https://hrms-backend-8254.onrender.com/api/announcements/${id}`, { headers: { Authorization: token } });
           fetchNews();
       } catch (err) { alert("Error deleting"); }
   };

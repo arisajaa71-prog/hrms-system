@@ -28,7 +28,7 @@ export default function LeaveForm() {
         if (!token) return;
 
         const myId = JSON.parse(atob(token.split('.')[1])).user.id;
-        const res = await axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } });
+        const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } });
         
         const me = res.data.find(e => e._id === myId);
         if(me) setBalance(me.leaveBalance);
@@ -64,7 +64,7 @@ export default function LeaveForm() {
       }
 
       // 2. Submit the Request (with Multipart Header)
-      await axios.post('http://localhost:5001/api/leaves', data, {
+      await axios.post('https://hrms-backend-8254.onrender.com/api/leaves', data, {
         headers: { 
             Authorization: token,
             'Content-Type': 'multipart/form-data' // <--- REQUIRED FOR FILES

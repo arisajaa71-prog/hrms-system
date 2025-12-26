@@ -103,7 +103,7 @@ export default function Payroll({ role }) {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const empRes = await axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } });
+      const empRes = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } });
       setEmployees(empRes.data.filter(emp => emp.role !== 'Owner'));
       setLoading(false);
     } catch (err) { console.error(err); setLoading(false); }
@@ -112,7 +112,7 @@ export default function Payroll({ role }) {
   const fetchPayrollList = async () => {
       try {
           const token = localStorage.getItem('token');
-          const res = await axios.get(`http://localhost:5001/api/payroll/list?month=${formData.month}&year=${formData.year}`, { headers: { Authorization: token } });
+          const res = await axios.get(`https://hrms-backend-8254.onrender.com/api/payroll/list?month=${formData.month}&year=${formData.year}`, { headers: { Authorization: token } });
           setPayrolls(res.data);
       } catch (err) { console.error(err); }
   };
@@ -271,7 +271,7 @@ export default function Payroll({ role }) {
   const handleApprove = async (id) => {
       try {
           const token = localStorage.getItem('token');
-          await axios.put(`http://localhost:5001/api/payroll/approve/${id}`, {}, { headers: { Authorization: token } });
+          await axios.put(`https://hrms-backend-8254.onrender.com/api/payroll/approve/${id}`, {}, { headers: { Authorization: token } });
           fetchPayrollList(); setOpenPreview(false);
       } catch(err) { alert('Error approving'); }
   };
@@ -280,7 +280,7 @@ export default function Payroll({ role }) {
       if(!window.confirm("Approve ALL draft payrolls for this month?")) return;
       try {
           const token = localStorage.getItem('token');
-          await axios.put(`http://localhost:5001/api/payroll/approve-all`, { month: formData.month, year: formData.year }, { headers: { Authorization: token } });
+          await axios.put(`https://hrms-backend-8254.onrender.com/api/payroll/approve-all`, { month: formData.month, year: formData.year }, { headers: { Authorization: token } });
           fetchPayrollList(); alert("All Approved!");
       } catch(err) { alert('Error approving'); }
   };
@@ -297,7 +297,7 @@ export default function Payroll({ role }) {
       if(!window.confirm("Are you sure you want to delete this payroll record?")) return;
       try {
           const token = localStorage.getItem('token');
-          await axios.delete(`http://localhost:5001/api/payroll/${id}`, { headers: { Authorization: token } });
+          await axios.delete(`https://hrms-backend-8254.onrender.com/api/payroll/${id}`, { headers: { Authorization: token } });
           fetchPayrollList();
       } catch(err) { alert("Error deleting record"); }
   };
@@ -421,7 +421,7 @@ export default function Payroll({ role }) {
       try {
         const token = localStorage.getItem('token');
         const data = { salaryDetails: compData.salaryDetails, bankDetails: compData.bankDetails, salary: autoGross };
-        await axios.put(`http://localhost:5001/api/employees/${editEmp._id}/compensation`, data, { headers: { Authorization: token } });
+        await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${editEmp._id}/compensation`, data, { headers: { Authorization: token } });
         alert("Compensation Updated!"); handleCloseEdit(); fetchData(); 
       } catch (err) { alert("Error updating compensation"); }
   };
@@ -464,7 +464,7 @@ export default function Payroll({ role }) {
         arrears: formData.arrears, 
         deductions: { unpaidLeaveDays: formData.unpaidLeaveDays, loan: formData.loanDeduction, other: 0 }
       };
-      await axios.post('http://localhost:5001/api/payroll/generate', payload, { headers: { Authorization: token } });
+      await axios.post('https://hrms-backend-8254.onrender.com/api/payroll/generate', payload, { headers: { Authorization: token } });
       setMsg({ type: 'success', content: '✅ Payslip Updated!' });
       fetchPayrollList(); setFormData(prev => ({ ...prev, otNormal: 0, otNight: 0, otHoliday: 0, bonus: 0, arrears: 0, latenessHours: 0, unpaidLeaveDays: 0, loanDeduction: 0 }));
     } catch (err) { setMsg({ type: 'error', content: err.response?.data?.msg || 'Error generating payroll' }); }
@@ -480,7 +480,7 @@ export default function Payroll({ role }) {
             month: Number(formData.month), 
             year: Number(formData.year)    
         };
-        const res = await axios.post('http://localhost:5001/api/payroll/bulk-generate', payload, { headers: { Authorization: token } });
+        const res = await axios.post('https://hrms-backend-8254.onrender.com/api/payroll/bulk-generate', payload, { headers: { Authorization: token } });
         setMsg({ type: 'success', content: res.data.msg }); 
         setTimeout(() => fetchPayrollList(), 500); 
       } catch(err) { setMsg({ type: 'error', content: "Error running bulk payroll" }); } finally { setBulkLoading(false); }

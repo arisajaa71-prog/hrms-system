@@ -21,8 +21,8 @@ export default function Analytics({ onNavigate }) {
     try {
       const token = localStorage.getItem('token');
       const [empRes, leaveRes] = await Promise.all([
-        axios.get('http://localhost:5001/api/employees', { headers: { Authorization: token } }),
-        axios.get('http://localhost:5001/api/leaves', { headers: { Authorization: token } })
+        axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: token } }),
+        axios.get('https://hrms-backend-8254.onrender.com/api/leaves', { headers: { Authorization: token } })
       ]);
 
       const employees = empRes.data;

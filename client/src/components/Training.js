@@ -11,7 +11,7 @@ const Training = ({ role }) => {
 
   const fetchTrainings = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/training');
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/training');
       setTrainings(res.data);
     } catch (err) { console.error(err); }
   };
@@ -21,7 +21,7 @@ const Training = ({ role }) => {
   const handleAssign = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5001/api/training', formData);
+      await axios.post('https://hrms-backend-8254.onrender.com/api/training', formData);
       alert('✅ Training Assigned!');
       setFormData({ employeeId: '', courseName: '', deadline: '', description: '' });
       fetchTrainings();
@@ -30,7 +30,7 @@ const Training = ({ role }) => {
 
   const handleComplete = async (id) => {
     try {
-      await axios.put(`http://localhost:5001/api/training/${id}`, { status: 'Completed' });
+      await axios.put(`https://hrms-backend-8254.onrender.com/api/training/${id}`, { status: 'Completed' });
       alert('🎉 Course Completed!');
       fetchTrainings();
     } catch (err) { alert(err.message); }

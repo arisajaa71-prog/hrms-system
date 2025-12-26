@@ -39,23 +39,23 @@ export default function Recruitment() {
     }, []);
 
     const fetchJobs = async () => {
-        const res = await axios.get('http://localhost:5001/api/recruitment/jobs', { headers: { Authorization: localStorage.getItem('token') } });
+        const res = await axios.get('https://hrms-backend-8254.onrender.com/api/recruitment/jobs', { headers: { Authorization: localStorage.getItem('token') } });
         setJobs(res.data);
     };
 
     const fetchManagers = async () => {
-        const res = await axios.get('http://localhost:5001/api/employees', { headers: { Authorization: localStorage.getItem('token') } });
+        const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', { headers: { Authorization: localStorage.getItem('token') } });
         setManagers(res.data);
     };
 
     const fetchApplicants = async (jobId) => {
-        const res = await axios.get(`http://localhost:5001/api/recruitment/applicants/${jobId}`, { headers: { Authorization: localStorage.getItem('token') } });
+        const res = await axios.get(`https://hrms-backend-8254.onrender.com/api/recruitment/applicants/${jobId}`, { headers: { Authorization: localStorage.getItem('token') } });
         setApplicants(res.data);
     };
 
     // --- JOB LOGIC ---
     const handleCreateJob = async () => {
-        await axios.post('http://localhost:5001/api/recruitment/jobs', jobForm, { headers: { Authorization: localStorage.getItem('token') } });
+        await axios.post('https://hrms-backend-8254.onrender.com/api/recruitment/jobs', jobForm, { headers: { Authorization: localStorage.getItem('token') } });
         setOpenNewJob(false);
         fetchJobs();
     };
@@ -76,7 +76,7 @@ export default function Recruitment() {
         formData.append('phone', candidateForm.phone);
         if (candidateForm.resume) formData.append('resume', candidateForm.resume);
 
-        await axios.post('http://localhost:5001/api/recruitment/applicants', formData, { 
+        await axios.post('https://hrms-backend-8254.onrender.com/api/recruitment/applicants', formData, { 
             headers: { Authorization: localStorage.getItem('token'), 'Content-Type': 'multipart/form-data' } 
         });
         setOpenAddCandidate(false);
@@ -84,7 +84,7 @@ export default function Recruitment() {
     };
 
     const updateStage = async (id, newStage) => {
-        await axios.put(`http://localhost:5001/api/recruitment/applicants/stage/${id}`, { stage: newStage }, { headers: { Authorization: localStorage.getItem('token') } });
+        await axios.put(`https://hrms-backend-8254.onrender.com/api/recruitment/applicants/stage/${id}`, { stage: newStage }, { headers: { Authorization: localStorage.getItem('token') } });
         fetchApplicants(selectedJob._id);
     };
 
@@ -96,7 +96,7 @@ export default function Recruitment() {
 
     const confirmHire = async () => {
         try {
-            await axios.post(`http://localhost:5001/api/recruitment/hire/${candidateToHire._id}`, hireData, { 
+            await axios.post(`https://hrms-backend-8254.onrender.com/api/recruitment/hire/${candidateToHire._id}`, hireData, { 
                 headers: { Authorization: localStorage.getItem('token') } 
             });
             alert("Candidate moved to Onboarding Pipeline!");

@@ -43,7 +43,7 @@ export default function MyInfo() {
       
       setCurrentUserId(myId);
 
-      const res = await axios.get('http://localhost:5001/api/employees', { 
+      const res = await axios.get('https://hrms-backend-8254.onrender.com/api/employees', { 
         headers: { Authorization: token } 
       });
       
@@ -71,7 +71,7 @@ export default function MyInfo() {
       setMsg({ type: '', content: '' });
       try {
           const token = localStorage.getItem('token');
-          await axios.put(`http://localhost:5001/api/employees/${currentUserId}`, formData, {
+          await axios.put(`https://hrms-backend-8254.onrender.com/api/employees/${currentUserId}`, formData, {
               headers: { Authorization: token }
           });
           setMsg({ type: 'success', content: 'Profile Updated Successfully!' });
@@ -93,7 +93,7 @@ export default function MyInfo() {
       if (!filePath) return null;
 
       // Clean path to ensure URL works
-      const fileUrl = `http://localhost:5001/${filePath.replace(/\\/g, "/")}`;
+      const fileUrl = `https://hrms-backend-8254.onrender.com/${filePath.replace(/\\/g, "/")}`;
 
       return (
           <Grid item xs={12} sm={6} md={4}>

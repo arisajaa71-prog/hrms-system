@@ -3,7 +3,7 @@ import { Paper, Box, Typography, Avatar, Chip } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'; // Changed Icon to Calendar
 
 function getAvatarSrc(path) {
-    return path ? `http://localhost:5001/${path}` : null;
+    return path ? `https://hrms-backend-8254.onrender.com/${path}` : null;
 }
 
 export default function ProfileHeader({ user }) {
